@@ -1,0 +1,54 @@
+.col-sm-6 img {
+  width: 80%;
+  height: 80vh;
+  border: 1px solid #dae2f9;
+  margin-top: 20px;
+}
+
+.col-sm-2 img {
+  width: 70px;
+  height: 70px;
+}
+
+.price {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.describe p {
+  line-height: 30px;
+  text-align: left;
+  margin: 10px
+}
+
+.stock {
+  float: right;
+  margin: 20px;
+}
+
+.buttons {
+  text-align: end;
+  display: flex;
+  /* margin: 0px; */
+  justify-content: flex-end;
+  gap: 40px;
+  position: relative;
+  bottom: 40px
+}
+
+swiper-container img {
+  width: 200px;
+  height: 150px;
+  margin: 10px
+}
+
+.card {
+  border: none;
+}
+
+swiper-container .price {
+  display: flex;
+  font-size: small;
+  justify-content: center;
+}

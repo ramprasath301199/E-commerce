@@ -1,0 +1,24 @@
+<div class="container-fluid" @animation>
+  <div class="row">
+    <form [formGroup]="myform">
+      <h4 class="mb-3 text-center">Login</h4>
+      <div class="mb-3">
+        <label for="" class="form-label">Username</label>
+        <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="name"
+          formControlName="name" />
+        <span class="text-danger">{{errname}}</span>
+      </div>
+      <div class="mb-3" style="position: relative;">
+        <label for="" class="form-label">Password</label>
+        <input [type]="type" class="form-control" name="password" id="" aria-describedby="helpId" placeholder="password"
+          formControlName="password" />
+        <fa-icon (click)="show()" style="position: absolute;right: 6px;bottom: 6px" [icon]="eye"></fa-icon>
+      </div>
+      <span class="text-danger" style="position: relative;bottom: 10px;">{{errpass}}</span>
+      <div class="text-center">
+        <div class="btn btn-primary" (click)="submit(myform)">Login</div>
+        <p class="mt-2">You Dont Have a Account Please <a style="text-decoration: none;" href="/signup">SignUp</a></p>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<app-header />
+<div>
+  <div class="row">
+    <div class="col-sm-3">
+      <app-sidenav (click)="onSelectionUpdate()"/>
+    </div>
+    <div class="col-sm-9">
+      <app-main [selectedData]="selectedData"/>
+    </div>
+  </div>
+</div>
+<app-footer />

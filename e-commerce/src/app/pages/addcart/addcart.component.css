@@ -1,0 +1,30 @@
+.container-fluid {
+  background-color: #f1f3f6;
+  height: 100%;
+  --bs-gutter-x: 0;
+}
+
+.price {
+  display: flex;
+  font-size: small;
+  gap: 10px;
+}
+
+mat-card {
+  border: 1px solid #dae2f9;
+  box-shadow: none;
+  padding: 10px;
+  background-color: white;
+}
+
+.col-sm-4 {
+  position: absolute;
+  margin-top: 1.5rem;
+  right: 20px
+}
+
+@media only screen and (max-width: 575px) {
+  .col-sm-4 {
+    position: relative !important;
+  }
+}

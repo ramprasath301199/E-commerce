@@ -1,0 +1,188 @@
+<div class="container-fluid">
+  <div class="row mb-5">
+    @if (!selectedData || (selectedData.cat == "" && selectedData.brands == "" && selectedData.rate4 == false &&
+    selectedData.rate3 ==
+    false)) {
+    <div class="col-sm-6 col-lg-3 mt-5" *ngFor="let item of allproducts; let i = index; trackBy: trackById">
+      <mat-card [routerLink]="['/home/'+item._id]" (click)="getcat(item.category,item._id)">
+        <div>
+          <span class="badge  text-bg-success">{{item.category | titlecase}}</span>
+        </div>
+        <img mat-card-md-image [src]="item.thumbnail" />
+        <div class="heading">
+          <p class="text-center">{{ item.title }}</p>
+        </div>
+        <div class="rating text-center mb-3">
+          <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+        </div>
+        <div class="price">
+          <p style="font-weight: bolder;">&#8377;{{item.price}}</p>
+          <p style="text-decoration: line-through" class="text-muted">&#8377;{{item.price /
+            (1-item.discountPercentage/100) | number:'1.2-2'}}</p>
+          <p style="font-weight: bold;font-size: small;color: green;">{{item.discountPercentage}}&percnt; off</p>
+        </div>
+      </mat-card>
+    </div>
+    }@else {
+    @for (item of allproducts; track $index) {
+    @if (selectedData.cat.trim().toLowerCase() === item.category.trim().toLowerCase()) {
+    @if(!selectedData.rate3 && !selectedData.rate4){
+    <div class="col-sm-6 col-lg-3 mt-5">
+      <mat-card [routerLink]="['/home/'+item._id]" (click)="getcat(item.category,item._id)">
+        <div>
+          <span class="badge  text-bg-success">{{item.category | titlecase}}</span>
+        </div>
+        <img mat-card-md-image [src]="item.thumbnail" />
+        <div class="heading">
+          <p class="text-center">{{ item.title }}</p>
+        </div>
+        <div class="rating text-center mb-3">
+          <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+        </div>
+        <div class="price">
+          <p style="font-weight: bolder;">&#8377;{{item.price}}</p>
+          <p style="text-decoration: line-through" class="text-muted">&#8377;{{item.price /
+            (1-item.discountPercentage/100) | number:'1.2-2'}}</p>
+          <p style="font-weight: bold;font-size: small;color: green;">{{item.discountPercentage}}&percnt; off</p>
+        </div>
+      </mat-card>
+    </div>
+    }@else if(!selectedData.rate3 && selectedData.rate4){
+    @if(item.rating > 4){
+    <div class="col-sm-6 col-lg-3 mt-5">
+      <mat-card [routerLink]="['/home/'+item._id]" (click)="getcat(item.category,item._id)">
+        <div>
+          <span class="badge  text-bg-success">{{item.category}}</span>
+        </div>
+        <img mat-card-md-image [src]="item.thumbnail" />
+        <div class="heading">
+          <p class="text-center">{{ item.title }}</p>
+        </div>
+        <div class="rating text-center mb-3">
+          <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+        </div>
+        <div class="price">
+          <p style="font-weight: bolder;">&#8377;{{item.price}}</p>
+          <p style="text-decoration: line-through" class="text-muted">&#8377;{{item.price /
+            (1-item.discountPercentage/100) | number:'1.2-2'}}</p>
+          <p style="font-weight: bold;font-size: small;color: green;">{{item.discountPercentage}}&percnt; off</p>
+        </div>
+      </mat-card>
+    </div>
+    }
+    }@else if (selectedData.rate3 && !selectedData.rate4) {
+    @if(item.rating <=4 ){ <div class="col-sm-6 col-lg-3 mt-5">
+      <mat-card [routerLink]="['/home/'+item._id]" (click)="getcat(item.category,item._id)">
+        <div>
+          <span class="badge  text-bg-success">{{item.category}}</span>
+        </div>
+        <img mat-card-md-image [src]="item.thumbnail" />
+        <div class="heading">
+          <p class="text-center">{{ item.title }}</p>
+        </div>
+        <div class="rating text-center mb-3">
+          <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+        </div>
+        <div class="price">
+          <p style="font-weight: bolder;">&#8377;{{item.price}}</p>
+          <p style="text-decoration: line-through" class="text-muted">&#8377;{{item.price /
+            (1-item.discountPercentage/100) | number:'1.2-2'}}</p>
+          <p style="font-weight: bold;font-size: small;color: green;">{{item.discountPercentage}}&percnt; off</p>
+        </div>
+      </mat-card>
+  </div>
+  }
+  }@else {
+    <div class="col-sm-6 col-lg-3 mt-5">
+      <mat-card [routerLink]="['/home/'+item._id]" (click)="getcat(item.category,item._id)">
+        <div>
+          <span class="badge  text-bg-success">{{item.category}}</span>
+        </div>
+        <img mat-card-md-image [src]="item.thumbnail" />
+        <div class="heading">
+          <p class="text-center">{{ item.title }}</p>
+        </div>
+        <div class="rating text-center mb-3">
+          <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+        </div>
+        <div class="price">
+          <p style="font-weight: bolder;">&#8377;{{item.price}}</p>
+          <p style="text-decoration: line-through" class="text-muted">&#8377;{{item.price /
+            (1-item.discountPercentage/100) | number:'1.2-2'}}</p>
+          <p style="font-weight: bold;font-size: small;color: green;">{{item.discountPercentage}}&percnt; off</p>
+        </div>
+      </mat-card>
+    </div>
+  }
+  }@else if ((selectedData.rate3 && selectedData.rate4)&& selectedData.cat == "") {
+  <div class="col-sm-6 col-lg-3 mt-5">
+    <mat-card [routerLink]="['/home/'+item._id]" (click)="getcat(item.category,item._id)">
+      <div>
+        <span class="badge  text-bg-success">{{item.category}}</span>
+      </div>
+      <img mat-card-md-image [src]="item.thumbnail" />
+      <div class="heading">
+        <p class="text-center">{{ item.title }}</p>
+      </div>
+      <div class="rating text-center mb-3">
+        <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+      </div>
+      <div class="price">
+        <p style="font-weight: bolder;">&#8377;{{item.price}}</p>
+        <p style="text-decoration: line-through" class="text-muted">&#8377;{{item.price /
+          (1-item.discountPercentage/100) | number:'1.2-2'}}</p>
+        <p style="font-weight: bold;font-size: small;color: green;">{{item.discountPercentage}}&percnt; off</p>
+      </div>
+    </mat-card>
+  </div>
+  }
+  @else if ((selectedData.rate3 && !selectedData.rate4) && selectedData.cat == "") {
+  @if(item.rating <= 4){ <div class="col-sm-6 col-lg-3 mt-5">
+    <mat-card [routerLink]="['/home/'+item._id]" (click)="getcat(item.category,item._id)">
+      <div>
+        <span class="badge  text-bg-success">{{item.category}}</span>
+      </div>
+      <img mat-card-md-image [src]="item.thumbnail" />
+      <div class="heading">
+        <p class="text-center">{{ item.title }}</p>
+      </div>
+      <div class="rating text-center mb-3">
+        <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+      </div>
+      <div class="price">
+        <p style="font-weight: bolder;">&#8377;{{item.price}}</p>
+        <p style="text-decoration: line-through" class="text-muted">&#8377;{{item.price /
+          (1-item.discountPercentage/100) | number:'1.2-2'}}</p>
+        <p style="font-weight: bold;font-size: small;color: green;">{{item.discountPercentage}}&percnt; off</p>
+      </div>
+    </mat-card>
+</div>
+}
+}@else if ((!selectedData.rate3 && selectedData.rate4)&& selectedData.cat == "") {
+@if(item.rating > 4){
+<div class="col-sm-6 col-lg-3 mt-5">
+  <mat-card [routerLink]="['/home/'+item._id]" (click)="getcat(item.category,item._id)">
+    <div>
+      <span class="badge  text-bg-success">{{item.category}}</span>
+    </div>
+    <img mat-card-md-image [src]="item.thumbnail" />
+    <div class="heading">
+      <p class="text-center">{{ item.title }}</p>
+    </div>
+    <div class="rating text-center mb-3">
+      <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+    </div>
+    <div class="price">
+      <p style="font-weight: bolder;">&#8377;{{item.price}}</p>
+      <p style="text-decoration: line-through" class="text-muted">&#8377;{{item.price /
+        (1-item.discountPercentage/100) | number:'1.2-2'}}</p>
+      <p style="font-weight: bold;font-size: small;color: green;">{{item.discountPercentage}}&percnt; off</p>
+    </div>
+  </mat-card>
+</div>
+}
+}
+}
+}
+</div>
+</div>

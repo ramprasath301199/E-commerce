@@ -1,0 +1,19 @@
+<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home">E-Commerce</a>
+    <div class="faicon">
+      @if (title != "cart" && title !='buynow') {
+      <div>
+        <fa-icon matTooltip="Cart" aria-label="Button that displays a tooltip when focused or hovered over"
+          [routerLink]="['/cart']" [icon]="cart" style="color: white;"></fa-icon>&nbsp;<span
+          class="text-light">Cart</span>
+      </div>
+      }
+      <div>
+        <fa-icon matTooltip="logout" aria-label="Button that displays a tooltip when focused or hovered over"
+          [icon]="logout" style="color: white;" (click)="signout()"></fa-icon>
+        &nbsp;<span class="text-light">Logout</span>
+      </div>
+    </div>
+  </div>
+</nav>

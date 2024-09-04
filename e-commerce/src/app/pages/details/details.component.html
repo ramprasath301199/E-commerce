@@ -1,0 +1,70 @@
+<app-header />
+<div class="container-fluid mb-5">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-2">
+          <img [src]="product.thumbnail" class="rounded float-start" alt="product image">
+        </div>
+        <div class="col-sm-10">
+          <img [src]="product.images[0]" class="rounded float-start" alt="product image">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="title mt-4">
+        <h2 style="font-size: x-large;">{{product.title}}</h2>
+      </div>
+      <div class="rating mb-3">
+        <span class="badge text-bg-primary">{{product.rating}} &starf;</span>
+      </div>
+      <div class="price">
+        <h4 style="font-weight: 400;">&#8377;{{product.price}}</h4>
+        <h6 style="text-decoration: line-through;font-size: larger" class="text-muted">&#8377;{{product.price /
+          (1-product.discountPercentage/100) | number:'1.2-2'}}</h6>
+        <h6 style="font-weight: 500;font-size: medium;color: green;">{{product.discountPercentage}}&percnt; off</h6>
+      </div>
+      <div class="describe">
+        <p>{{product.description}}</p>
+      </div>
+      <div class="stock">
+        <span class="badge text-bg-success">{{product.stock}} Stack Only Avaliable</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <div class="btn btn-lg" style="background-color: #ff9f00; color: white;" (click)="addcart(product._id)"><fa-icon
+          [icon]="cart"></fa-icon>&nbsp; ADD CART </div>
+      <a class="btn btn-lg" style="background-color: #fb641b; color: white" [routerLink]="['/buynow']"><fa-icon [icon]="buy"></fa-icon>&nbsp; BUY
+        NOW</a>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-sm-12">
+      <h4 class="mb-3">Similar Products {{category | titlecase}}</h4>
+      <swiper-container slides-per-view="3" speed="500" loop="true" css-mode="true" navigation="true">
+        @for (item of similar; track $index) {
+        <swiper-slide>
+          <div class="card text-white d-flex align-items-center"  (click)="getcat(item.category,item._id)">
+            <img [src]="item.thumbnail" alt="" srcset="">
+            <div class="card-body">
+              <div class="heading">
+                <p class="text-dark text-center">{{ item.title }}</p>
+              </div>
+              <div class="rating text-center mb-3">
+                <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+              </div>
+              <div class="price">
+                <p style="font-weight: bolder;" class="text-dark">&#8377;{{item.price}}</p>
+                <p style="text-decoration: line-through" class="text-muted">&#8377;{{item.price /
+                  (1-item.discountPercentage/100) | number:'1.2-2'}}</p>
+                <p style="font-weight: bold;font-size: small;color: green;">{{item.discountPercentage}}&percnt; off</p>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  </div>
+</div>
+<app-footer />

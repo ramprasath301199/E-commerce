@@ -1,0 +1,36 @@
+<div class="container-fluid" @animation>
+  <div class="row">
+    <form [formGroup]="myform">
+      <h4 class="mb-3 text-center">Sign-Up</h4>
+      <div class="mb-3">
+        <label for="" class="form-label">Username</label>
+        <input type="text" class="form-control" name="name" id="" aria-describedby="helpId" placeholder="name"
+          formControlName="name" />
+          <span class="text-danger">{{errname}}</span>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" id="" aria-describedby="helpId" placeholder="email"
+          formControlName="email" />
+          <span class="text-danger">{{erremail}}</span>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Mobile</label>
+        <input type="number" class="form-control" name="mobile" id="" aria-describedby="helpId" placeholder="mobile"
+          formControlName="mobile" />
+          <span class="text-danger">{{errmobile}}</span>
+      </div>
+      <div class="mb-3" style="position: relative;">
+        <label for="" class="form-label">Password</label>
+        <input [type]="type" class="form-control" name="password" id="" aria-describedby="helpId"
+          placeholder="password" formControlName="password" />
+        <fa-icon (click)="show()" style="position: absolute;right: 6px;bottom: 6px" [icon]="eye"></fa-icon>
+      </div>
+      <span class="text-danger" style="position: relative;bottom: 10px;">{{errpass}}</span>
+      <div class="text-center">
+        <div class="btn btn-primary" (click)="submit(myform)">SignUp</div>
+        <p class="mt-2">You Have a Account Please <a style="text-decoration: none;" href="/login">Login</a></p>
+      </div>
+    </form>
+  </div>
+</div>

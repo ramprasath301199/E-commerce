@@ -1,0 +1,151 @@
+<app-header [title]="title" />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-9 mt-2">
+      <mat-stepper [orientation]="'horizontal'" #stepper [linear]="false">
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill out your Personal</ng-template>
+            <!-- <mat-form-field>
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First name"
+              </mat-form-field> -->
+            <div class="mb-3">
+              <label for="" class="form-label">First Name</label>
+              <input type="text" class="form-control" formControlName="fname" aria-describedby="helpId" placeholder=""
+                required />
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Last Name</label>
+              <input type="text" class="form-control" formControlName="lname" aria-describedby="helpId" placeholder=""
+                required />
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Mobile</label>
+              <input type="number" class="form-control" maxlength="10" formControlName="mobile"
+                aria-describedby="helpId" placeholder="" required />
+            </div>
+            <div>
+              <button mat-button matStepperNext
+                [disabled]="firstFormGroup.value.fname == '' || firstFormGroup.value.lname =='' || firstFormGroup.value.mobile =='' || firstFormGroup.value.mobile.length != 10">Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            <div class="row">
+              <div class="mb-3">
+                <label for="" class="form-label">Pincode</label>
+                <input type="text" class="form-control" formControlName="pincode" pattern="[0-9]" id=""
+                  aria-describedby="helpId" placeholder="" required />
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Address</label>
+                <textarea class="form-control" formControlName="address" id="" rows="3" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">State</label>
+                <input type="text" class="form-control" formControlName="state" aria-describedby="helpId" placeholder=""
+                  required />
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">District</label>
+                <input type="text" class="form-control" formControlName="district" aria-describedby="helpId"
+                  placeholder="" required />
+              </div>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext
+                [disabled]="secondFormGroup.value.state == '' || secondFormGroup.value.district == '' || secondFormGroup.value.address == '' || secondFormGroup.value.pincode == ''">Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Cart Item</ng-template>
+          <div *ngFor="let item of cartdatas; let i = index" class=" mt-4">
+            <mat-card>
+              <div class="row">
+                <div class="col-sm-3">
+                  <img mat-card-md-image [src]="item.thumbnail" />
+                </div>
+                <div class="col-sm-9">
+                  <div class="brands">
+                    <span class="badge bg-success">{{item.brand}}</span>
+                  </div>
+                  <mat-card-header>
+                    <mat-card-title style="font-size: large;">{{item.title}}</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content [formGroup]="myform">
+                    <div class="rating mb-3">
+                      <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+                    </div>
+                    <div class="price">
+                      <p style="text-decoration: line-through;font-weight: 500;font-size:medium;" class="text-muted">
+                        &#8377;{{item.price / (1-item.discountPercentage/100) | number:'1.2-2'}}
+                      </p>
+                      <p style="font-weight: 500;font-size:large ;">&#8377;{{item.price}}</p>
+                      <p style="font-weight: 500;font-size: medium;color: green;">{{item.discountPercentage}}&percnt;
+                        off</p>
+                    </div>
+                    <div class="qty d-flex align-items-center" style="gap:10px" formArrayName="quantities">
+                      <fa-icon (click)="decrease(i,item.stock)" [icon]="minus" [size]="'lg'"></fa-icon>
+                      <input type="text" class="form-control text-center" [formControlName]="i"
+                        aria-describedby="helpId" placeholder="" style="width:10%;" />
+                      <fa-icon (click)="increase(i,item.stock)" [icon]="plus" [size]="'lg'"></fa-icon>
+                      <div class="btn btn-danger btn-sm " style="margin-left: 20px;" (click)="remove(item)">Remove</div>
+                    </div>
+                  </mat-card-content>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          You are now done.
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+    <div class="col-sm-3 mt-4">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Price Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="mt-3">
+          <div class="price-details" style="display: flex;justify-content: space-between;">
+            <p>Price ({{cartdatas.length}} items)</p>
+            <p>&#8377; {{total | number:'1.2-2'}}</p>
+          </div>
+          <div class="discount" style="display: flex;justify-content: space-between;">
+            <p>Discount</p>
+            <p class="text-success">- &#8377;{{total - subtotal | number:'1.2-2'}}</p>
+          </div>
+          <div class="delivery" style="display: flex;justify-content: space-between;">
+            <p>Delivery</p>
+            <p class="text-success">Free</p>
+          </div>
+          <hr>
+          <div class="total" style="display: flex;justify-content: space-between;">
+            <p style="font-size: large;font-weight: bold;">Total Amount</p>
+            <p style="font-size: large;font-weight: bold;">&#8377;{{subtotal | number:'1.2-2'}}</p>
+          </div>
+          <div class="saved mt-4">
+            <p class="text-success" style="font-size: medium;font-weight: bold;">
+              You Will Save &#8377;{{subtotal | number:'1.2-2'}} on This Order
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

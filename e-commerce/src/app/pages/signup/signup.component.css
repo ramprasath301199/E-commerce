@@ -1,0 +1,42 @@
+:root {
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: url("../../../assets/images/galaxy.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover; */
+  transition: 0.5s 5s ease-in;
+}
+
+form {
+  width: 400px;
+  min-height: 200px;
+  border: 1px solid rgba(128, 128, 128, 0.32);
+  padding: 20px 40px 20px 40px;
+  border-radius: 20px;
+  /* color: white; */
+  /* background: #21252966;
+  backdrop-filter: brightness(0.7) */
+}
+
+.row {
+  justify-content: center;
+  position: absolute;
+}
+
+@media only screen and (max-width:500px) {
+  form {
+    width: 300px;
+    min-height: 200px;
+    border: 1px solid rgba(128, 128, 128, 0.32);
+    padding: 20px 40px 20px 40px;
+    border-radius: 20px;
+  }
+}

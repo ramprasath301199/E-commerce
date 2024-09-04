@@ -1,0 +1,83 @@
+<app-header [title]="cart"></app-header>
+<div class="container-fluid mb-5">
+  @if(alldata.length > 0){
+  <div class="row" style="position: relative;">
+    <div *ngFor="let item of cartdatas; let i = index" class="col-sm-8 mt-4">
+      <mat-card>
+        <div class="row">
+          <div class="col-sm-3">
+            <img mat-card-md-image [src]="item.thumbnail" />
+          </div>
+          <div class="col-sm-9">
+            <div class="brands">
+              <span class="badge bg-success">{{item.brand}}</span>
+            </div>
+            <mat-card-header>
+              <mat-card-title style="font-size: large;">{{item.title}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content [formGroup]="myform">
+              <div class="rating mb-3">
+                <span class="badge rounded-pill text-bg-primary">{{item.rating}} &starf;</span>
+              </div>
+              <div class="price">
+                <p style="text-decoration: line-through;font-weight: 500;font-size:medium;" class="text-muted">
+                  &#8377;{{item.price / (1-item.discountPercentage/100) | number:'1.2-2'}}
+                </p>
+                <p style="font-weight: 500;font-size:large ;">&#8377;{{item.price}}</p>
+                <p style="font-weight: 500;font-size: medium;color: green;">{{item.discountPercentage}}&percnt; off</p>
+              </div>
+              <div class="qty d-flex align-items-center" style="gap:10px" formArrayName="quantities">
+                <fa-icon (click)="decrease(i,item.stock)" [icon]="minus" [size]="'lg'"></fa-icon>
+                <input type="text" class="form-control text-center" [formControlName]="i" aria-describedby="helpId"
+                  placeholder="" style="width:10%;" />
+                <fa-icon (click)="increase(i,item.stock)" [icon]="plus" [size]="'lg'"></fa-icon>
+              </div>
+            </mat-card-content>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <!-- Price Details Column -->
+    <div class="col-sm-4">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Price Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="mt-3">
+          <div class="price-details" style="display: flex;justify-content: space-between;">
+            <p>Price ({{cartdatas.length}} items)</p>
+            <p>&#8377; {{total | number:'1.2-2'}}</p>
+          </div>
+          <div class="discount" style="display: flex;justify-content: space-between;">
+            <p>Discount</p>
+            <p class="text-success">- &#8377;{{total - subtotal | number:'1.2-2'}}</p>
+          </div>
+          <div class="delivery" style="display: flex;justify-content: space-between;">
+            <p>Delivery</p>
+            <p class="text-success">Free</p>
+          </div>
+          <hr>
+          <div class="total" style="display: flex;justify-content: space-between;">
+            <p style="font-size: large;font-weight: bold;">Total Amount</p>
+            <p style="font-size: large;font-weight: bold;">&#8377;{{subtotal | number:'1.2-2'}}</p>
+          </div>
+          <div class="saved mt-4">
+            <p class="text-success" style="font-size: medium;font-weight: bold;">
+              You Will Save &#8377;{{subtotal | number:'1.2-2'}} on This Order
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <app-footer style="position: relative; top:10px"></app-footer>
+  </div>
+  }@else {
+  <div class="row">
+    <p class="text-danger text-center"> No Item to Cart</p>
+  </div>
+  <app-footer style="position: absolute;
+  width: 98.5%;
+  bottom: 0"></app-footer>
+  }
+
+</div>
